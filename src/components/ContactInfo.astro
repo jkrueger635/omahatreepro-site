@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site.js';
+---
+<ul class="info-boxes">
+  <li>
+    <span class="info-icon"><Icon name="envelope" size={20} /></span>
+    <div><p class="info-label">Email us</p><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+  </li>
+  <li>
+    <span class="info-icon"><Icon name="headset" size={20} /></span>
+    <div><p class="info-label">Call us</p><p><a href={site.phoneHref}>{site.phone}</a></p></div>
+  </li>
+</ul>

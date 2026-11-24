@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { home, services } from '../data/content.js';
+import { site } from '../data/site.js';
+---
+<Base title={home.title} description={home.description}>
+  <link slot="head" rel="preload" as="image" href="/images/omahaarborist-sm.webp" media="(max-width: 800px)" fetchpriority="high" />
+  <link slot="head" rel="preload" as="image" href="/images/omahaarborist-lg.webp" media="(min-width: 801px)" fetchpriority="high" />
+
+  <section class="hero-home dark">
+    <img class="bg" src="/images/omahaarborist-lg.webp" srcset="/images/omahaarborist-sm.webp 800w, /images/omahaarborist-lg.webp 1600w" sizes="100vw" alt="" width="1600" height="1067" fetchpriority="high" />
+    <div class="hero-in">
+      <img class="hero-logo" src="/images/logo-white.webp" alt="Omaha Tree Pro" width="1280" height="608" />
+      <h1>Premium Tree Solutions</h1>
+      <a class="btn btn-yellow" href="#services">OUR SERVICES</a>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <section class="tint" id="services" aria-labelledby="services-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">WHAT WE DO</p>
+        <h2 id="services-h">Our Tree Services</h2>
+      </div>
+      <ul class="cards3">
+        {services.map((s) => (
+          <li>
+            <img class="circle" src={`/images/${s.thumb}.webp`} alt="" width="310" height="310" loading="lazy" decoding="async" />
+            <p class="sub">{s.subtitle}</p>
+            <h3>{s.name}</h3>
+            <p>{s.summary}</p>
+            <a class="arrow" href={`/${s.slug}/`} aria-label={`Learn more about ${s.name}`}><Icon name="arrow" size={22} /></a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band dark" aria-labelledby="arborist-h">
+    <img class="bg" src="/images/Bush-Trimming-lg.webp" srcset="/images/Bush-Trimming-sm.webp 800w, /images/Bush-Trimming-lg.webp 1600w" sizes="100vw" alt="" width="1600" height="1067" loading="lazy" decoding="async" />
+    <div class="wrap">
+      <div class="band-card">
+        <h2 id="arborist-h">Certified Arborists for Expert Tree Care</h2>
+        <div class="call-box">
+          <span class="call-icon"><Icon name="phone" size={34} /></span>
+          <div>
+            <p class="call-label">Call Us Now</p>
+            <p class="call-num"><a href={site.phoneHref}>{site.phone}</a></p>
+          </div>
+        </div>
+        <p class="band-text">Omaha Tree Pro boasts certified arborists well-versed in tree biology and cutting-edge tree care techniques. You can truly trust our expertise.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint" aria-labelledby="testi-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">TESTIMONIALS</p>
+        <h2 id="testi-h">What People Say About Us</h2>
+      </div>
+      <ul class="testis">
+        {home.testimonials.map((t) => (
+          <li>
+            <figure>
+              <blockquote><p>{t.quote}</p></blockquote>
+              <figcaption>{t.who}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <ContactSection heading="Contact Us" paragraphs={["We're happy to give you a free estimate."]} />
+</Base>

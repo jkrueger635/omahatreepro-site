@@ -1,0 +1,6 @@
+---
+import { icons } from '../data/icons.js';
+const { name, size = 24 } = Astro.props;
+const i = icons[name];
+---
+<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${i.w} ${i.h}`} width={size} height={size} fill="currentColor" aria-hidden="true" focusable="false"><path d={i.d} /></svg>

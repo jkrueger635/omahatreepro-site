@@ -1,0 +1,16 @@
+---
+import ContactInfo from './ContactInfo.astro';
+import FormCard from './FormCard.astro';
+// heading + paragraphs are the left column; the form card is on the right
+const { heading, paragraphs = [] } = Astro.props;
+---
+<section class="contact" aria-labelledby="contact-h">
+  <div class="wrap two-col">
+    <div class="contact-text">
+      <h2 id="contact-h">{heading}</h2>
+      {paragraphs.map((p) => <p>{p}</p>)}
+      <ContactInfo />
+    </div>
+    <FormCard />
+  </div>
+</section>

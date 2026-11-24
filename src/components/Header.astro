@@ -1,0 +1,18 @@
+---
+import { nav, navCta } from '../data/site.js';
+const path = Astro.url.pathname;
+---
+<header class="site">
+  <div class="header-in">
+    <a class="logo" href="/"><img src="/images/logo.webp" alt="Omaha Tree Pro, home" width="415" height="100" /></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="main" id="main-nav" aria-label="Main">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+        <li><a class="btn btn-green" href={navCta.href} aria-current={path === navCta.href ? 'page' : undefined}>{navCta.label}</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { services } from '../data/content.js';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const h = `/images/${s.hero}`;
+---
+<Base title={s.title} description={s.description}>
+  <link slot="head" rel="preload" as="image" href={`${h}-sm.webp`} media="(max-width: 800px)" fetchpriority="high" />
+  <link slot="head" rel="preload" as="image" href={`${h}-lg.webp`} media="(min-width: 801px)" fetchpriority="high" />
+
+  <section class="hero-page dark">
+    <img class="bg" src={`${h}-lg.webp`} srcset={`${h}-sm.webp 800w, ${h}-lg.webp 1600w`} sizes="100vw" alt="" width="1600" height="1067" fetchpriority="high" />
+    <div class="hero-in">
+      <h1>{s.h1}</h1>
+      <p>{s.intro}</p>
+    </div>
+  </section>
+
+  <section class="why" aria-labelledby="why-h">
+    <div class="wrap">
+      <h2 id="why-h" class="center">{s.whyHeading}</h2>
+      <ul class="why-grid">
+        {s.why.map((w) => (
+          <li>
+            <span class="why-icon"><Icon name={w.icon} size={36} /></span>
+            <div><h3>{w.title}</h3><p>{w.body}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="process" aria-labelledby="process-h">
+    <div class="wrap process-grid">
+      <div class="process-side">
+        <p class="eyebrow-plain">Certified Arborist</p>
+        <h2 id="process-h">{s.processHeading}</h2>
+        <a class="btn btn-green" href="/estimate/">Schedule an Estimate</a>
+      </div>
+      <ol class="process-cards">
+        {s.process.map((p) => (
+          <li><h3>{p.title}</h3><p>{p.body}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <ContactSection heading={s.ctaHeading} paragraphs={s.cta} />
+</Base>

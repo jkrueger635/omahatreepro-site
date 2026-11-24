@@ -1,0 +1,11 @@
+# Old WordPress URLs -> new URLs. Format: from  to  status   (one per line)
+# Fill this from `node scripts/check-urls.mjs` output (see PLAYBOOK.md, SEO parity).
+# Examples:
+# /old-page   /new-page/   301
+# /old-page/  /new-page/   301
+/sitemap_index.xml /sitemap-index.xml 301
+/sitemap.xml /sitemap-index.xml 301
+/wp-sitemap.xml /sitemap-index.xml 301
+/post-sitemap.xml /sitemap-index.xml 301
+/page-sitemap.xml /sitemap-index.xml 301
+/sitemaps.xml /sitemap-index.xml 301

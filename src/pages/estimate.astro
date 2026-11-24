@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import FormCard from '../components/FormCard.astro';
+import { estimate } from '../data/content.js';
+---
+<Base title={estimate.title} description={estimate.description}>
+  <section class="estimate" aria-labelledby="est-h">
+    <div class="wrap two-col">
+      <div class="estimate-text">
+        <h1 id="est-h">{estimate.h1}</h1>
+        <p>{estimate.intro}</p>
+        <FormCard title={false} />
+      </div>
+      <img class="estimate-img" src="/images/Omaha-Tree-Services.webp" alt="A freshly cut green lawn with a wood fence and tall evergreen trees behind it" width="714" height="714" fetchpriority="high" />
+    </div>
+  </section>
+</Base>

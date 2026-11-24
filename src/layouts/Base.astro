@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import { site } from '../data/site.js';
+
+const { title, description = '', image = '/images/share.jpg', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+const ga = import.meta.env.PROD && site.gaId;
+const gaInit = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.gaId}');`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={title} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <slot name="head" />
+  {ga && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`}></script>}
+  {ga && <script is:inline set:html={gaInit}></script>}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <Header />
+  <main id="main"><slot /></main>
+  {site.elfsightId && <script is:inline src="https://elfsightcdn.com/platform.js" async></script>}
+  <script is:inline>
+    (function () {
+      var b = document.querySelector('.menu-toggle'), n = document.getElementById('main-nav');
+      if (!b || !n) return;
+      b.addEventListener('click', function () {
+        var open = b.getAttribute('aria-expanded') === 'true';
+        b.setAttribute('aria-expanded', String(!open));
+        n.classList.toggle('open', !open);
+      });
+    })();
+  </script>
+</body>
+</html>

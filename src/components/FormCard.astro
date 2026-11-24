@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site.js';
+// One Elfsight form widget is reused on every page (one per page). Set the ID in src/data/site.js.
+const { title = true } = Astro.props;
+---
+<div class="form-card">
+  {title && <h3>Have a Quick Question?</h3>}
+  {title && <p>Let us know how we can help:</p>}
+  <div class="form-slot">
+    {site.elfsightId
+      ? <div class={`elfsight-app-${site.elfsightId}`} data-elfsight-app-lazy></div>
+      : <p class="form-placeholder">Contact form goes here. Add the Elfsight widget ID in <code>src/data/site.js</code>.</p>}
+  </div>
+</div>
