@@ -1,4 +1,4 @@
 # CHANGE `name` to the Cloudflare Pages project name for this site.
-name = "omahatreepro"
+name = "omahatreepro-site"
 compatibility_date = "2026-10-01"
 pages_build_output_dir = "./dist"
